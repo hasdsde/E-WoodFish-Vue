@@ -1,6 +1,6 @@
 <template>
   <div>
-    <q-list padding class="rounded-borders text-primary">
+    <q-list dark padding class="rounded-borders text-primary">
       <q-item clickable v-ripple :active="link === item.link" v-for="(item, index) in menus" :key="index"
         @click="link = item.link" :to="item.link" active-class="my-menu-link">
         <q-item-section avatar>

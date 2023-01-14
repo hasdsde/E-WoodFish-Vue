@@ -55,6 +55,9 @@ function updateBreadcrumbs() {
     }
   });
 }
-
-
 </script>
+<style>
+.body--dark {
+  background: #000
+}
+</style>
