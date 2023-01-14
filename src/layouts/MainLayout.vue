@@ -14,9 +14,6 @@
 
     <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
       <q-list>
-        <q-item-label header>
-          Essential Links
-        </q-item-label>
         <Aside />
       </q-list>
     </q-drawer>
@@ -28,13 +25,36 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import EssentialLink from 'components/EssentialLink.vue';
+import { ref, watch } from 'vue';
 import Aside from 'src/components/Aside.vue';
-
+import { menus } from 'src/components/models';
+import { useRouter } from 'vue-router';
+import { list } from 'postcss';
+const $router = useRouter()
 const leftDrawerOpen = ref(false)
+let CurrentMemu = ref([])
+
+function loadPage() {
+
+}
+loadPage()
+
 
 function toggleLeftDrawer() {
   leftDrawerOpen.value = !leftDrawerOpen.value
 }
+watch(() => $router.currentRoute.value.path, (oldValue, newValue) => {
+  updateBreadcrumbs()
+})
+
+function updateBreadcrumbs() {
+  menus.forEach((element: any) => {
+    if (element.link == $router.currentRoute.value.path.replace('/', '')) {
+      CurrentMemu.value = element
+      console.log(CurrentMemu.value)
+    }
+  });
+}
+
+
 </script>
