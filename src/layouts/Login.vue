@@ -25,7 +25,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { api } from "boot/axios";
-import { CommonSuccess, CommonFail } from 'boot/common'
+import { CommonSuccess, CommonFail } from 'src/components/common'
 let userid = ref('')
 let password = ref('')
 function handleLogin() {

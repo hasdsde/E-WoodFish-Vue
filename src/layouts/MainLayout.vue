@@ -46,7 +46,7 @@ function toggleLeftDrawer() {
 watch(() => $router.currentRoute.value.path, (oldValue, newValue) => {
   updateBreadcrumbs()
 })
-
+//面包屑
 function updateBreadcrumbs() {
   menus.forEach((element: any) => {
     if (element.link == $router.currentRoute.value.path.replace('/', '')) {
