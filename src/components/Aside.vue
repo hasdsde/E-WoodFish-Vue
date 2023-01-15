@@ -15,8 +15,8 @@
 <script setup>
 import { ref } from 'vue'
 import { menus } from 'components/models.ts'
-const link = ref('inboxs')
-
+const CurrentLink = defineProps(['link'])
+const link = ref(CurrentLink.link)
 </script>
 
 <style lang="css">

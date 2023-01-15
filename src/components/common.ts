@@ -1,5 +1,8 @@
 import { Notify } from "quasar";
 
+export function getLocalItem(item: string) {
+  return localStorage.getItem(item)
+}
 // 一般成功消息
 export function CommonSuccess(msg: string) {
   Notify.create({

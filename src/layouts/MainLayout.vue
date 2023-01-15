@@ -5,16 +5,18 @@
         <q-btn flat dense round icon="menu" aria-label="Menu" @click="toggleLeftDrawer" />
 
         <q-toolbar-title>
-          Quasar App
+          <div class="text-body1">
+            {{ CurrentMemu.desc }}
+          </div>
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <div>用户名:{{ getUserInfo() }}</div>
       </q-toolbar>
     </q-header>
 
     <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
       <q-list>
-        <Aside />
+        <Aside :link="CurrentMemu.link" />
       </q-list>
     </q-drawer>
 
@@ -28,21 +30,31 @@
 import { ref, watch } from 'vue';
 import Aside from 'src/components/Aside.vue';
 import { menus } from 'src/components/models';
-import { useRouter } from 'vue-router';
-import { list } from 'postcss';
+import { RouterView, useRouter } from 'vue-router';
+import { CommonWarn, getLocalItem } from 'src/components/common';
+import { QLayout, QHeader, QToolbar, QBtn, QToolbarTitle, QDrawer, QList, QPageContainer } from 'quasar';
 const $router = useRouter()
 const leftDrawerOpen = ref(false)
-let CurrentMemu = ref([])
-
+let CurrentMemu: any = ref([])
 function loadPage() {
-
+  updateBreadcrumbs()
 }
 loadPage()
 
-
+//获取用户名
+function getUserInfo(): any { //any这下好了吧
+  if (getLocalItem('username') == null) {
+    CommonWarn('用户未登录')
+    $router.push('/login')
+  } else {
+    return getLocalItem('username')
+  }
+}
+//左上角抽屉
 function toggleLeftDrawer() {
   leftDrawerOpen.value = !leftDrawerOpen.value
 }
+//监听面包屑
 watch(() => $router.currentRoute.value.path, (oldValue, newValue) => {
   updateBreadcrumbs()
 })
@@ -51,7 +63,6 @@ function updateBreadcrumbs() {
   menus.forEach((element: any) => {
     if (element.link == $router.currentRoute.value.path.replace('/', '')) {
       CurrentMemu.value = element
-      console.log(CurrentMemu.value)
     }
   });
 }

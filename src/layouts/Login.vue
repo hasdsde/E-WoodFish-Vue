@@ -6,14 +6,14 @@
         <span class="text-h5 text-weight-bold">登录</span>
       </q-card-section>
       <q-card-section>
-        <q-input square v-model="userid" outlined placeholder="用户ID" dense />
+        <q-input square v-model="username" outlined placeholder="用户名" dense />
       </q-card-section>
       <q-card-section>
         <q-input square v-model="password" outlined type="password" dense placeholder="密码" />
       </q-card-section>
       <q-card-section style="margin-top: 15px">
         <q-btn-group>
-          <q-btn rounded color="secondary" label="注册" />
+          <q-btn rounded color="secondary" label="注册" @click="handleRegister" />
           <q-btn rounded color="primary" label="登录" style="width: 300px" @click="handleLogin" />
         </q-btn-group>
       </q-card-section>
@@ -24,26 +24,34 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { api } from "boot/axios";
 import { CommonSuccess, CommonFail } from 'src/components/common'
-let userid = ref('')
+import axios from "axios";
+import { useRouter } from "vue-router";
+let rt = useRouter()
+let username = ref('')
 let password = ref('')
+
+//登录
 function handleLogin() {
   localStorage.clear()
-  api.post("/rootuser/login", {
-    "id": userid.value,
+  axios.post("http://localhost:8000/user/log", {
+    "username": username.value,
     "password": password.value
   }).then((res: any) => {
-    if (res.code === "200") {
-      localStorage.setItem("token", res.data.token)
-      localStorage.setItem("username", res.data.username)
-      localStorage.setItem("useravatar", res.data.avatar)
+    if (res.data.code === 200) {
+      localStorage.setItem("username", res.data.data.username)
+      // localStorage.setItem("token", res.data.token)
+      // localStorage.setItem("useravatar", res.data.avatar)
       CommonSuccess('登录成功')
-      window.location.href = '/'
+      rt.push('/')
     } else {
-      CommonFail(res.msg)
+      CommonFail('错误:' + res.data.code + '  信息：' + res.data.msg)
     }
   })
+}
+//注册
+function handleRegister() {
+
 }
 </script>
 
