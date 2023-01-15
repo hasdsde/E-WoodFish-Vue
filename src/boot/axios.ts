@@ -14,7 +14,7 @@ declare module '@vue/runtime-core' {
 // good idea to move this instance creation inside of the
 // "export default () => {}" function below (which runs individually
 // for each client)
-const api = axios.create({ baseURL: 'http://hasdsd.cn:8000' });
+const api = axios.create({ baseURL: 'http://localhost:8000' });
 
 export default boot(({ app }) => {
   // for use inside Vue files (Options API) through this.$axios and this.$api
@@ -39,7 +39,7 @@ export default boot(({ app }) => {
   //响应拦截器
   api.interceptors.response.use(res => {
     if (res.data.code == '200') {
-      return res.data
+      return res.data.data
     } else {
       CommonFail('错误:' + res.data.code + '  信息：' + res.data.msg)
     }

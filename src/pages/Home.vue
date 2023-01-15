@@ -1,6 +1,8 @@
 <template>
+  <div class="score q-mt-sm">
+    功德:{{ score }}
+  </div>
   <div class="q-pa-md  q-mt-xl">
-
     <div class="row">
       <div class="col">
       </div>
@@ -22,20 +24,33 @@
       <!-- <div v-if="show">功德+1</div> -->
     </transition>
   </div>
-
 </template>
 <script setup lang="ts">
+import { api } from 'src/boot/axios';
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 const show = ref(false)
-
+const $q = useRouter()
+let score: any = ref(0)
+let username: any = ref('')
+//获取分数
+score.value = localStorage.getItem('score')
+username.value = localStorage.getItem('username')
+if (score.value == null) {
+  $q.push('/login')
+}
 //点击事件
 function handleClick() {
   show.value = true
   setTimeout(function () {
     show.value = false
   }, 1)
-}
+  api.get('/logs/swear?username=' + username.value + '&score=1').then((res: any) => {
+    score.value = res.score
+    username.value = res.username
+  })
 
+}
 </script>
 
 <style>

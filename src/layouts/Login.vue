@@ -39,6 +39,7 @@ function handleLogin() {
     "password": password.value
   }).then((res: any) => {
     if (res.data.code === 200) {
+      localStorage.setItem("score", res.data.data.score)
       localStorage.setItem("username", res.data.data.username)
       // localStorage.setItem("token", res.data.token)
       // localStorage.setItem("useravatar", res.data.avatar)
