@@ -1,8 +1,21 @@
 <template>
-  <div>
-    这是排行页面
+  <div class="q-pa-md" style="max-width: 800px;">
+    <q-table title="排行榜" :rows="tops" :columns="columns" row-key="name" />
   </div>
 </template>
-<script lang="ts">
-
+<script setup lang="ts">
+import { api } from 'src/boot/axios';
+import { ref } from 'vue';
+let tops = ref([])
+const columns: any = [
+  { name: 'username', required: true, label: '用户名', align: 'left', field: 'username', sortable: true },
+  { name: 'score', align: 'center', label: 'score', field: 'score', sortable: true },
+  { name: 'createTime', label: '创建日期', field: 'createTime', sortable: true },
+]
+function flashTop() {
+  api.get('/user/top').then((res: any) => {
+    tops.value = res.data
+  })
+}
+flashTop()
 </script>

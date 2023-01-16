@@ -1,5 +1,5 @@
 <template>
-  <div class="q-pa-md">
+  <div class="q-pa-md" style="max-width: 800px;">
     <q-table title="道具" :rows="items" :columns="columns" row-key="name">
       <template v-slot:body-cell-handle="props">
         <q-td :props="props">
