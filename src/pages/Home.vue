@@ -1,5 +1,5 @@
 <template>
-  <div class="score q-mt-sm">
+  <div class="q-pt-md q-pl-md">
     功德:{{ score }}
   </div>
   <div class="q-pa-md  q-mt-xl">
@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="animated bounce text-center">
-      <q-btn color="primary" label="点击木鱼" @click="handleClick" />
+      <q-btn color="purple" label="点击木鱼" @click="handleClick" />
     </div>
   </div>
   <div class="score_plus">
@@ -48,6 +48,7 @@ function handleClick() {
   api.get('/logs/swear?username=' + username.value + '&score=1').then((res: any) => {
     score.value = res.data.score
     username.value = res.data.username
+    localStorage.setItem('score', score.value)
   })
 
 }

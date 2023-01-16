@@ -1,4 +1,7 @@
 <template>
+  <div class="q-pt-md q-pl-md">
+    {{ '用户名 :'+username + '分数： ' + score }}
+  </div>
   <div class="q-pa-md" style="max-width: 800px;">
     <q-table title="道具" :rows="items" :columns="columns" row-key="name" hide-bottom>
       <template v-slot:body-cell-handle="props">

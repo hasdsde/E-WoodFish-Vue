@@ -22,6 +22,6 @@ const link = ref(CurrentLink.link)
 <style lang="css">
 .my-menu-link {
   color: white;
-  background: #F2C037
+  background: rgb(156, 39, 176)
 }
 </style>
