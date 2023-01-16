@@ -10,7 +10,11 @@
           </div>
         </q-toolbar-title>
 
-        <div>用户名:{{ getUserInfo() }}</div>
+        <div>用户名:{{ getUserInfo() }}
+          &nbsp;
+          &nbsp;
+          <q-btn color="red" label="退出" size="sm" @click="handelLogOut" />
+        </div>
       </q-toolbar>
     </q-header>
 
@@ -65,6 +69,11 @@ function updateBreadcrumbs() {
       CurrentMemu.value = element
     }
   });
+}
+//登出
+function handelLogOut() {
+  localStorage.clear()
+  $router.push('/login')
 }
 </script>
 <style>

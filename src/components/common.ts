@@ -1,4 +1,4 @@
-import { Notify } from "quasar";
+import { Dialog, Notify } from "quasar";
 
 export function getLocalItem(item: string) {
   return localStorage.getItem(item)
@@ -20,7 +20,6 @@ export function CommonWarn(msg: string) {
     group: false
   })
 }
-
 export function CommonFail(msg: string) {
   Notify.create({
     type: 'negative',
@@ -37,7 +36,6 @@ export function CommonInfo(msg: string) {
     group: false
   })
 }
-
 //加载
 export function loading() {
   Notify.create({
@@ -46,7 +44,6 @@ export function loading() {
     position: 'top'
   })
 }
-
 export function loadedSuucess(fun: Function) {
   fun({
     icon: 'done',
@@ -56,7 +53,6 @@ export function loadedSuucess(fun: Function) {
     timeout: 1000
   })
 }
-
 export function loadFail(fun: Function) {
   fun({
     icon: 'done',
@@ -64,5 +60,15 @@ export function loadFail(fun: Function) {
     type: 'negative',
     message: "加载失败",
     timeout: 1000
+  })
+}
+//对话框
+export function DialogAlert(message: string) {
+  Dialog.create({
+    title: '消息',
+    message: message,
+    persistent: true
+  }).onOk(() => {
+    CommonWarn('此处应该有音频')
   })
 }
