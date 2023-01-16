@@ -39,7 +39,8 @@ export default boot(({ app }) => {
   //响应拦截器
   api.interceptors.response.use(res => {
     if (res.data.code == '200') {
-      return res.data.data
+      return res.data
+      //如果再多一层data可能会导致某些res为空
     } else {
       CommonFail('错误:' + res.data.code + '  信息：' + res.data.msg)
     }

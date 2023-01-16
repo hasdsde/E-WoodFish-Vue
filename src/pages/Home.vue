@@ -46,8 +46,8 @@ function handleClick() {
     show.value = false
   }, 1)
   api.get('/logs/swear?username=' + username.value + '&score=1').then((res: any) => {
-    score.value = res.score
-    username.value = res.username
+    score.value = res.data.score
+    username.value = res.data.username
   })
 
 }

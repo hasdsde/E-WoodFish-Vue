@@ -26,14 +26,13 @@ let username = localStorage.getItem('username')
 let score: any = localStorage.getItem('score')
 function loadPage() {
   api.get('/item/getAll').then(res => {
-    items.value = res
+    items.value = res.data
   })
 }
 loadPage()
 //用户消费
 function handleUse(props: any) {
   api.get('/cost/one?username=' + username + '&cost=' + props.row.cost + '&itemid=' + props.row.id + '&palt=2').then((res: any) => {
-    console.log(res);
     if (res.code == 200) {
       if (props.row.id == 1) {
         DialogAlert('佛不在乎')
@@ -41,7 +40,7 @@ function handleUse(props: any) {
       if (props.row.id == 2) {
         DialogAlert('韩明不在乎')
       }
-      if (props.row.id == 1) {
+      if (props.row.id == 3) {
         DialogAlert('宝不在乎')
       }
       score = score - props.row.cost
