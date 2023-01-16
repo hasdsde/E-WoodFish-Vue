@@ -1,6 +1,6 @@
 <template>
   <div class="q-pa-md" style="max-width: 800px;">
-    <q-table title="道具" :rows="items" :columns="columns" row-key="name">
+    <q-table title="道具" :rows="items" :columns="columns" row-key="name" hide-bottom>
       <template v-slot:body-cell-handle="props">
         <q-td :props="props">
           <q-btn color="purple" label="使用" size="sm" @click="handleUse(props)" />

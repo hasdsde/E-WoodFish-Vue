@@ -1,12 +1,16 @@
 <template>
   <div class="q-pa-md" style="max-width: 800px;">
-    <q-table title="排行榜" :rows="tops" :columns="columns" row-key="name" />
+    <q-table title="排行榜" :rows="tops" :columns="columns" row-key="name" rows-per-page-label="每页显示"
+      :pagination="InitialPagination" />
   </div>
 </template>
 <script setup lang="ts">
 import { api } from 'src/boot/axios';
 import { ref } from 'vue';
 let tops = ref([])
+let InitialPagination: any = {
+  rowsPerPage: 20
+}
 const columns: any = [
   { name: 'username', required: true, label: '用户名', align: 'left', field: 'username', sortable: true },
   { name: 'score', align: 'center', label: 'score', field: 'score', sortable: true },
