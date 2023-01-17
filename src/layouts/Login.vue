@@ -34,7 +34,7 @@ let password = ref('')
 //登录
 function handleLogin() {
   localStorage.clear()
-  axios.post("http://localhost:8000/user/log", {
+  axios.post("/api/user/login", {
     "username": username.value,
     "password": password.value
   }).then((res: any) => {
@@ -52,7 +52,17 @@ function handleLogin() {
 }
 //注册
 function handleRegister() {
-
+  axios.post("/api/user/reg", {
+    "username": username.value,
+    "password": password.value
+  }).then((res: any) => {
+    if (res.data.code === 200) {
+      CommonSuccess('注册成功')
+      handleLogin()
+    } else {
+      CommonFail('错误:' + res.data.code + '  信息：' + res.data.msg)
+    }
+  })
 }
 </script>
 
